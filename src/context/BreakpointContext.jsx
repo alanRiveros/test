@@ -7,9 +7,10 @@ export const BreakpointProvider = ({ children }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const isMediumScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
 
   return (
-    <BreakpointContext.Provider value={{ isSmallScreen, isMediumScreen }}>
+    <BreakpointContext.Provider value={{ isSmallScreen, isMediumScreen, isLargeScreen }}>
       {children}
     </BreakpointContext.Provider>
   );
