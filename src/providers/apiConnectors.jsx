@@ -1,17 +1,12 @@
-const axiosConnector = {
-    fetch: async (url) => {
-      const response = await fetch(url);
-      return response.json();
-    },
-  };
-  
-  const mockConnector = {
-    fetch: async (url) => {
-      return { message: `Mock data from ${url}` };
-    },
-  };
-  
-  export const connectors = {
-    axios: axiosConnector,
-    mock: mockConnector,
-  };
+import axios from 'axios';
+import jsonStrategy from '../strategies/jsonStrategy';
+import apiStrategy from '../strategies/apiStrategy';
+
+export const connectors = {
+  json: jsonStrategy,
+  axios: async () => {
+    const response = await axios.get('/weatherData.json'); // Ejemplo de conector con Axios
+    return response.data;
+  },
+  api: apiStrategy,
+};

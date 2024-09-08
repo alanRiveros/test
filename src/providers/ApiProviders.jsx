@@ -4,7 +4,7 @@ import { connectors } from './apiConnectors';
 const ApiContext = createContext();
 
 export const ApiProvider = ({ children, connectorType }) => {
-  const connector = connectors[connectorType] || connectors['axios'];
+  const connector = connectors[connectorType] || connectors['json'];
 
   return (
     <ApiContext.Provider value={connector}>

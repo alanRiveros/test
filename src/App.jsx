@@ -1,42 +1,93 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
+import SavedLocations from './pages/SavedLocations';
+import { Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography, Box } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import DetailsPage from './pages/DetailsPage';
+import { SearchProvider } from './context/SearchContext';
 
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { Box } from '@mui/material';
+const drawerWidth = 240;
 
 function App() {
+  // Hook para obtener la ubicación actual en la que estamos
+  const location = useLocation();
+
+  // Función para determinar si una ruta es la actual
+  const isActive = (path) => location.pathname === path;
+
+  // Lista de enlaces de navegación
+  const menuItems = [
+    { text: 'Home', icon: <DashboardIcon />, path: '/' },
+    { text: 'Saved Locations', icon: <FavoriteIcon />, path: '/saved-locations' }
+  ];
+
+
   return (
-    <Router>
-      <AppBar position="static">
+    <Box sx={{ 
+      display: 'flex', 
+      width: '98vw'
+      }}>
+      {/* Menú lateral */}
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="permanent"
+        anchor="left"
+      >
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" noWrap>
             Is Cloudy
           </Typography>
-          <Button color="inherit" component={Link} to="/">
-            Home
-          </Button>
-          <Button color="inherit" component={Link} to="/about">
-            About
-          </Button>
-          <Button color="inherit" component={Link} to="/contact">
-            Contact
-          </Button>
         </Toolbar>
-      </AppBar>
-      <Box sx={{ padding: 2 }}>
+        <List>
+          {menuItems.map((item) => (
+            <ListItem
+              button
+              key={item.text}
+              component={Link}
+              to={item.path}
+              selected={isActive(item.path)} // Estado activo
+            >
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+
+      {/* Contenido principal */}
+      <Box
+        component="main"
+        sx={{ 
+          flexGrow: 1, 
+          p: 3
+        }}
+      >
+        <Toolbar />
+        <SearchProvider> {/* Envolvemos la aplicación */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/saved-locations" element={<SavedLocations />} />
+          <Route path="/details/:city" element={<DetailsPage />} />
         </Routes>
+        </SearchProvider>
       </Box>
-    </Router>
+    </Box>
   );
 }
 
-export default App;
+export default function AppWrapper() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
