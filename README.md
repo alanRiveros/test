@@ -51,6 +51,7 @@ Sigue los pasos a continuación para instalar la aplicación:
    VITE_RAPIDAPI_KEY=TU_CLAVE_API_RAPIDAPI
    VITE_RAPIDAPI_HOST=weatherapi-com.p.rapidapi.com
    VITE_FORECAST_DAYS=5
+   VITE_CONNECTOR_TYPE=api
    ```
 
    **Importante**: Sustituye `TU_CLAVE_API_RAPIDAPI` por tu clave API personal de RapidAPI.
