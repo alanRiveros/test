@@ -18,19 +18,11 @@ const WeatherInfoCard = ({ title, description, value, icon, indicator }) => {
       <Grid container spacing={2}>
         <Grid item xs={8}>
           <Typography variant="h6">{title}</Typography>
-          <Typography variant="body2">{description}</Typography>
         </Grid>
         <Grid item xs={4} sx={{ textAlign: 'right' }}>
-          {icon && <Box>{icon}</Box>}
           <Typography variant="h5">{value}</Typography>
         </Grid>
       </Grid>
-
-      {indicator && (
-        <Box sx={{ mt: 2 }}>
-          <Typography variant="body2">{indicator}</Typography>
-        </Box>
-      )}
     </Box>
   );
 };

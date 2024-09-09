@@ -17,7 +17,6 @@ const DetailsPage = () => {
   const [loading, setLoading] = useState(false); // Manejar el estado de carga
   const [error, setError] = useState(null); // Manejar errores
 
-  console.log(state);
   // Si hay una ciudad en los parámetros, hacemos la búsqueda
   useEffect(() => {
     if (!weatherData && city) {
@@ -45,11 +44,11 @@ const DetailsPage = () => {
     return <Typography variant="h6">{error}</Typography>;
   }
 
-  console.log(weatherData);
   if (!weatherData) {
     return <Typography variant="h6">Error: No hay datos disponibles para esta ciudad.</Typography>;
   }
 
+  const today = new Date();
   return (
     <Box sx={{ padding: 3 }}>
       <IconButton
@@ -97,7 +96,7 @@ const DetailsPage = () => {
 
       {/* Detalles adicionales */}
       <Box sx={{ mt: 5 }}>
-        <WeatherDetails details={weatherData.current} forecast={weatherData.forecast} />
+        <WeatherDetails details={weatherData.current} forecast={weatherData.forecast} today={today}/>
       </Box>
     </Box>
   );

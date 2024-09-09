@@ -51,10 +51,10 @@ const MainWeatherCard = ({ weatherData, onMoreDetailsClick }) => {
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <Typography variant="h4">{name}</Typography>
-          <Typography variant="subtitle1">{localtime}</Typography>
+          <Typography variant="subtitle1">Hoy</Typography>
         </Grid>
         <Grid item xs={6} sx={{ textAlign: 'right' }}>
-          <Typography variant="h1">{temp_c}°C</Typography>
+          <Typography variant="h3">{temp_c}°C</Typography>
           <Typography variant="subtitle1">{condition.text}</Typography>
         </Grid>
       </Grid>
@@ -80,7 +80,7 @@ const MainWeatherCard = ({ weatherData, onMoreDetailsClick }) => {
             <FavoriteBorderIcon sx={{ color: 'grey' }} />
             )}
         </IconButton>
-      <Link
+        <Link
           to={`/details/${weatherData.location.name}`}
           style={{
             textDecoration: 'none', // Eliminamos el subrayado
