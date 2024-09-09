@@ -9,7 +9,7 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import theme from './theme/theme';
 
 // Leer el conector desde el archivo .env
-const connectorType = import.meta.env.VITE_CONNECTOR_TYPE || 'json'; // Usar 'json' como valor por defecto
+const connectorType = import.meta.env.VITE_CONNECTOR_TYPE || 'json'; // Usar 'json' como valor por defecto pero solo va a funcionar la busqueda de "London"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
